@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPMS Sensor Technology Pilot - City of Boston</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .header {
+            background: #091f2f;
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .logo-placeholder {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 150px;
+            height: 80px;
+            font-weight: 600;
+            color: #091f2f;
+            font-size: 0.9rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .privacy-section {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
+        }
+        
+        .privacy-badge {
+            display: inline-block;
+            background: #fb4d42;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        h2 {
+            color: #091f2f;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #fb4d42;
+        }
+        
+        .privacy-section h2 {
+            color: #091f2f;
+            border-bottom: 3px solid #22c55e;
+        }
+        
+        h3 {
+            color: #091f2f;
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-section h3 {
+            color: #091f2f;
+        }
+        
+        h4 {
+            color: #374151;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid #091f2f;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .collapsible {
+            background: white;
+            padding: 0;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .collapsible-header {
+            background: #091f2f;
+            color: white;
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .collapsible-header:hover {
+            background: #0a2945;
+        }
+        
+        .collapsible-header h2 {
+            color: white;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .collapsible-content.active {
+            max-height: 5000px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .collapsible-inner {
+            padding: 2rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #fb4d42;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fb4d42;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #fb4d42;
+        }
+        
+        .date-badge {
+            display: inline-block;
+            background: #091f2f;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .key-point {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #fb4d42;
+        }
+        
+        .key-point h4 {
+            color: #091f2f;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .key-point p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .section, .privacy-section, .collapsible-inner {
+                padding: 1.5rem;
+            }
+            
+            .key-points {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="-container">
+            <img src="city_boston.png" alt="City of Boston" style="height: 80px;">
+            <!-- Replace 'oet-logo.svg' with your actual SVG filename -->
+            <img src="emerging_tech.svg" alt="Office of Emerging Technology" style="height: 80px;">
+        </div>
+        <div class="hero">
+            <h1>TPMS Sensor Technology Pilot</h1>
+            <p class="subtitle">Privacy-First Traffic Analysis for School Transportation</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 1.5rem;"><strong>Office of Emerging Technology</strong></p>
+            <h2>Project Overview</h2>
+            <p><strong>Pilot Duration:</strong> October 8-10, 2025 | <strong>Location:</strong> Blue Hill Avenue near Quincy Street</p>
+            
+            <p>The City of Boston is testing a novel approach to understanding traffic patterns that affect school bus routes using low-cost sensors that capture passive Tire Pressure Monitoring System (TPMS) signals broadcast by vehicle tires to detect and analyze traffic movement.</p>
+            
+            <div class="key-points">
+                <div class="key-point">
+                    <h4>The Challenge</h4>
+                    <p>School buses across Boston Public Schools struggle with on-time arrivals. The city needs better traffic data to optimize routes and signal timing.</p>
+                </div>
+                <div class="key-point">
+                    <h4>The Solution</h4>
+                    <p>Low-cost sensors that capture TPMS signals from passing vehicles to measure traffic flow, queue lengths, and intersection wait times.</p>
+                </div>
+                <div class="key-point">
+                    <h4>The Goal</h4>
+                    <p>Validate whether this technology can provide actionable traffic data to improve school bus routing and traffic signal timing.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="privacy-section">
+            <div class="privacy-badge">🔒 Privacy-First Technology</div>
+            <h2>Your Privacy is Protected</h2>
+            
+            <p><strong>This pilot employs fundamentally privacy-protective technology.</strong> TPMS sensors broadcast anonymous, rotating identification codes from vehicle tires—they contain no personal information, no license plate data, no GPS coordinates, and cannot be linked to vehicle owners or operators. The City's sensors passively receive these public broadcasts to count and analyze traffic patterns.</p>
+
+            <h3>What This Technology Does NOT Collect:</h3>
+            <ul>
+                <li>No personally identifiable information (PII)</li>
+                <li>No images, faces, or license plates</li>
+                <li>No GPS coordinates or location tracking of individuals</li>
+                <li>No information about vehicle owners or operators</li>
+                <li>No ability to track or identify specific people</li>
+            </ul>
+
+            <h3>What This Technology DOES Collect:</h3>
+            <ul>
+                <li>Anonymous TPMS signals broadcast publicly by vehicle tires</li>
+                <li>Timestamps and signal strength (for traffic flow analysis)</li>
+                <li>TPMS type and unique sensor ID</li>
+                <li>Tire pressure and temperature readings</li>
+                <li>Sensor battery level and other operational metadata</li>
+                <li>Aggregate traffic patterns and vehicle counts</li>
+            </ul></li>
+                <li>Timestamps and signal strength (for traffic flow analysis)</li>
+                <li>Aggregate traffic patterns and vehicle counts</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>How is this different from cameras?</h4>
+                <p>Unlike camera-based traffic monitoring, TPMS sensors cannot capture images, identify individuals, or track specific people. This approach provides cities with traffic intelligence while avoiding the privacy concerns associated with visual surveillance infrastructure.</p>
+            </div>
+
+            <h3>Data Retention & Security</h3>
+            <ul>
+                <li>TPMS data retained for only 30 days, then deleted or anonymized</li>
+                <li>Encrypted transmission (TLS) between devices and secure servers</li>
+                <li>Encrypted storage (AES-256) for all retained data</li>
+                <li>Access restricted to authorized Code Metal and City of Boston personnel only</li>
+                <li>No third-party access to raw data</li>
+            </ul>
+
+            <h3>Can TPMS Data Be Linked to Vehicle Owners?</h3>
+            <p><strong>No.</strong> TPMS IDs are not connected to any government or manufacturer vehicle registration databases. Additionally, these IDs may change when sensors are replaced or serviced. Without external data that Code Metal and the City of Boston do not and will not collect, these signals remain completely anonymous.</p>
+
+            <p style="margin-top: 1.5rem;"><strong>All privacy-related technical documentation is available to the public upon request.</strong></p>
+        </div>
+
+        <div class="collapsible">
+            <div class="collapsible-header" onclick="toggleCollapsible()">
+                <h2>Detailed Pilot Scope & Technical Information</h2>
+                <span class="toggle-icon" id="toggleIcon">▼</span>
+            </div>
+            <div class="collapsible-content" id="collapsibleContent">
+                <div class="collapsible-inner">
+                    <h3>Research Questions</h3>
+                    <p>This proof-of-concept pilot seeks to answer the following questions in order of priority:</p>
+                    
+                    <ol>
+                        <li><strong>Can TPMS sensors reliably detect and count vehicles in real-world intersection conditions?</strong>
+                            <ul>
+                                <li>What is the detection accuracy compared to professional traffic counts?</li>
+                                <li>What is the effective range and optimal placement for sensors?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Can we identify school buses by their unique TPMS signatures?</strong>
+                            <ul>
+                                <li>Do school buses have distinguishable TPMS signals?</li>
+                                <li>If so, can this provide independent verification of GPS data?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Can we extract meaningful traffic metrics from TPMS signal patterns?</strong>
+                            <ul>
+                                <li>Queue length estimation (repeated signals from stationary vehicles)</li>
+                                <li>Intersection wait times</li>
+                                <li>Turning movement counts</li>
+                                <li>Vehicle type differentiation (if possible)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Is this technology suitable for supporting Bloomberg Project traffic management goals?</strong>
+                            <ul>
+                                <li>Can it provide data useful for signal timing adjustments?</li>
+                                <li>Can it measure effectiveness of traffic mitigation measures?</li>
+                                <li>Is it cost-effective and scalable compared to alternatives?</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3>Pilot Timeline</h3>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="date-badge">October 8, 2025</div>
+                            <h4>Deployment and Controlled Testing</h4>
+                            
+                            <p><strong>Afternoon: Sensor Installation</strong></p>
+                            <ul>
+                                <li>Deploy 2-5 TPMS sensors at selected locations along Blue Hill Avenue near Quincy Street</li>
+                                <li>Sensors positioned to monitor traffic flow while minimizing public visibility</li>
+                                <li>Installation must be complete before 6:15am October 9</li>
+                                <li>Weather note: Rain expected; assess any impact on installation or sensor performance</li>
+                            </ul>
+                            
+                            <p><strong>Afternoon/Evening: Controlled Validation Testing</strong></p>
+                            <ul>
+                                <li><strong>Known Vehicle Testing:</strong> Multiple drive-by tests using City-owned vehicle with known TPMS signature to establish baseline sensor performance</li>
+                                <li><strong>School Bus TPMS Identification:</strong> Visit Hoyt Street Bus Lot or King School (2:00pm-3:00pm) to capture TPMS signatures from multiple school buses</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="date-badge">October 9, 2025</div>
+                            <h4>Full-Day Data Collection and Baseline Comparison</h4>
+                            
+                            <p><strong>7:00am - 7:00pm: Concurrent Data Collection</strong></p>
+                            <ul>
+                                <li>TPMS sensors collect continuous traffic data</li>
+                                <li>Professional traffic counters conduct manual counts at same locations</li>
+                                <li>Passive data collection—no active monitoring or intervention</li>
+                            </ul>
+                            
+                            <p><strong>Priority Time Windows:</strong></p>
+                            <ul>
+                                <li>Morning school arrival: 7:30am - 8:30am</li>
+                                <li>Afternoon school dismissal: 2:00pm - 3:00pm</li>
+                            </ul>
+                            
+                            <p>Professional traffic count will provide ground truth data including total vehicle volumes, turning movement counts, and queue lengths.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="date-badge">October 10, 2025</div>
+                            <h4>Analysis and Validation Report</h4>
+                            <ul>
+                                <li>Retrieve sensors and download datasets</li>
+                                <li>Correlate TPMS sensor data with professional traffic count baseline</li>
+                                <li>Develop initial models and assess data quality</li>
+                                <li>Document technical performance, limitations, and unexpected findings</li>
+                                <li>Prepare Phase 1 validation report with Phase 2 recommendations</li>
+                                <li>Present findings to City stakeholders</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>Success Criteria</h3>
+                    <p>Phase 1 is considered successful if:</p>
+                    <ul>
+                        <li>Sensors reliably detect vehicle presence with measurable accuracy</li>
+                        <li>Data shows statistically significant correlation with professional traffic counts</li>
+                        <li>Queue length or wait time can be estimated from TPMS signal patterns</li>
+                        <li>Data quality is sufficient to inform traffic signal timing decisions</li>
+                        <li>No significant technical failures or data loss during the collection period</li>
+                    </ul>
+                    
+                    <p><strong>Bonus outcomes (not required for success):</strong></p>
+                    <ul>
+                        <li>School buses successfully identified by TPMS signatures</li>
+                        <li>High correlation (>80%) between sensor counts and manual counts during peak hours</li>
+                    </ul>
+
+                    <h3>The Technology: A Dual Innovation</h3>
+                    <p>This pilot represents two innovations:</p>
+                    <ol>
+                        <li><strong>The sensing approach itself:</strong> Using passive TPMS signals for traffic detection is a novel application of existing vehicle technology that is privacy-friendly, low-cost, and rapidly deployable.</li>
+                        <li><strong>The modular sensor platform:</strong> The hardware architecture is designed to be adaptable—the TPMS detection component could theoretically be swapped for other sensor types (GPS, Bluetooth, etc.), creating a flexible platform for various traffic data collection needs.</li>
+                    </ol>
+
+                    <h3>Future Vision</h3>
+                    <p>If validated, the City of Boston Bloomberg Team envisions pairing this TPMS sensor technology with existing school bus GPS data to build a predictive model of traffic impacting school buses. This combined approach would provide both the "where buses are" (GPS) and the "what traffic conditions they're encountering" (TPMS sensors), treating the bus fleet as a representative sample of citywide traffic flow. This would enable Boston to identify bottlenecks and optimize traffic light timing along critical routes without the need for expensive new infrastructure.</p>
+
+                    <h3>Project Responsibilities</h3>
+                    
+                    <h4>Office of Emerging Technology</h4>
+                    <ul>
+                        <li>Project and vendor management</li>
+                        <li>Pilot evaluation</li>
+                        <li>Site planning and installation support</li>
+                        <li>Sensor hardware for the duration of the pilot</li>
+                        <li>Data analysis and validation</li>
+                        <li>Assist with in-person counts and data verification</li>
+                        <li>Feedback summary and final report</li>
+                    </ul>
+
+                    <h4>Boston Transportation Department (BTD)</h4>
+                    <ul>
+                        <li>Selection of pilot locations</li>
+                        <li>Feedback on data quality and accuracy</li>
+                        <li>Input on traffic management applications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Questions or Concerns?</h2>
+            <p>If you have questions about this pilot program or concerns about privacy, please contact the City of Boston Office of Emerging Technology.</p>
+            
+            <p style="margin-top: 1.5rem;"><strong>Project Manager:</strong><br>
+            Sam Brenner<br>
+            <a href="mailto:samuel.brenner@boston.gov" style="color: #091f2f;">samuel.brenner@boston.gov</a><br>
+            617-519-1976</p>
+            
+            <p style="margin-top: 1.5rem;"><strong>All privacy-related technical documentation is available to the public upon request.</strong></p>
+        </div>
+    </div>
+
+    <script>
+        function toggleCollapsible() {
+            const content = document.getElementById('collapsibleContent');
+            const icon = document.getElementById('toggleIcon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                icon.textContent = '▲';
+            }
+        }
+    </script>
+</body>
+</html>
